@@ -4,14 +4,10 @@ This repository contains a Python implementation of an **optical flow–based vi
 The objective is to propagate a **manual edit applied to a reference frame** across a video sequence
 using dense and long-term motion estimation.
 
----
-
 ## Context
 
 This project was developed in the context of the **UE Computer Vision** course.  
 It is intended as an **educational baseline**, not as a production-ready system.
-
----
 
 ## Objectives
 
@@ -22,8 +18,6 @@ The goals of this project are to:
 - Propagate a **manual image edit** consistently across a video sequence
 - Analyze typical limitations such as drift, occlusions, and temporal artifacts
 
----
-
 ## Pipeline Overview
 
 1. Load a sequence of input frames  
@@ -31,8 +25,6 @@ The goals of this project are to:
 3. Accumulate motion to obtain long-term displacement fields  
 4. Warp the edited reference frame through time  
 5. Generate an edited output video  
-
----
 
 ## Project Structure
 
@@ -83,3 +75,16 @@ project/
 |
 `-- slides/
     `-- presentation.pdf
+
+## Requirements
+
+Python ≥ 3.9
+NumPy
+OpenCV
+SciPy
+Matplotlib
+tqdm
+
+Install dependencies with:
+```text
+pip install -r requirements.txt
