@@ -1,5 +1,5 @@
-Optical Flow–Based Video Editing
-===============================
+Long-term dense motion estimation for video editing
+===================================================
 
 This repository contains a Python implementation of an optical flow–based video
 editing pipeline.
@@ -28,52 +28,54 @@ Pipeline Overview
 5. Generate an edited output video
 
 Project Structure
------------------
+----------------
 
 project/
-|
-|-- README.txt
-|-- requirements.txt
-|
-|-- data/
-|   |-- input_frames/          (input video frames)
-|   `-- masks/                 (optional: manual or automatic)
-|
-|-- edit/
-|   |-- reference_frame.png
-|   `-- edited_frame.png       (edited externally, e.g. with GIMP)
-|
-|-- output/
-|   |-- flow_visualization/
-|   |-- propagated_frames/
-|   `-- final_video.mp4
-|
-|-- src/
-|   |-- config.py              (paths and global parameters)
-|   |
-|   |-- motion/
-|   |   |-- optical_flow.py    (dense optical flow estimation)
-|   |   |-- long_term_flow.py  (temporal integration)
-|   |   `-- visualization.py
-|   |
-|   |-- editing/
-|   |   |-- warping.py         (image warping)
-|   |   |-- propagation.py    (edit propagation logic)
-|   |   `-- occlusion.py       (optional occlusion handling)
-|   |
-|   |-- evaluation/
-|   |   |-- temporal_metrics.py
-|   |   `-- qualitative.py
-|   |
-|   |-- utils/
-|   |   |-- io.py              (frame I/O utilities)
-|   |   |-- video.py           (frame <-> video conversion)
-|   |   `-- logging.py
-|   |
-|   `-- main.py                (end-to-end pipeline)
-|
-`-- slides/
-    `-- presentation.pdf
+├── README.txt
+├── requirements.txt
+│
+├── data/
+│   ├── input_frames/
+│   │   ├── frame_000.png
+│   │   ├── frame_001.png
+│   │   └── ...
+│   └── masks/                     (optional: manual or automatic)
+│
+├── edit/
+│   ├── reference_frame.png
+│   └── edited_frame.png           (edited externally, e.g. with GIMP)
+│
+├── output/
+│   ├── flow_visualization/
+│   ├── propagated_frames/
+│   └── final_video.mp4
+│
+├── src/
+│   ├── config.py                  (paths and global parameters)
+│   │
+│   ├── motion/
+│   │   ├── optical_flow.py         (dense optical flow estimation)
+│   │   ├── long_term_flow.py       (temporal integration)
+│   │   └── visualization.py
+│   │
+│   ├── editing/
+│   │   ├── warping.py              (image warping)
+│   │   ├── propagation.py          (edit propagation logic)
+│   │   └── occlusion.py            (optional occlusion handling)
+│   │
+│   ├── evaluation/
+│   │   ├── temporal_metrics.py
+│   │   └── qualitative.py
+│   │
+│   ├── utils/
+│   │   ├── io.py                   (frame I/O utilities)
+│   │   ├── video.py                (frame <-> video conversion)
+│   │   └── logging.py
+│   │
+│   └── main.py                    (end-to-end pipeline)
+│
+└── slides/
+    └── presentation.pdf
 
 Requirements
 ------------
