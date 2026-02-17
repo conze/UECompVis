@@ -1,6 +1,7 @@
 # Long-term dense motion estimation for video editing
 
-This repository contains a Python implementation of an **optical flow–based video editing pipeline**.
+This repository contains a Python implementation of an **optical flow**–based **video editing **pipeline.
+
 The objective is to propagate a **manual edit applied to a reference frame** across a video sequence
 using dense and long-term motion estimation.
 
@@ -27,7 +28,7 @@ The goals of this project are to:
 
 ## Disclaimer
 
-This code is provided for educational purposes only. It is intentionally simplified and does not handle all real-world challenges robustly. Students are encouraged to identify failure cases, analyze limitations, propose and implement improvements.
+This code is intentionally simplified and does not handle all real-world challenges robustly. Students are encouraged to identify **failure cases**, analyze **limitations**, propose and implement **improvements**.
 
 ## Project structure
 
@@ -43,31 +44,21 @@ project/
 |   |   `-- ...
 |
 |-- edit/
-|   |-- reference_frame.png
-|   `-- edited_frame.png           (edited externally, e.g. with GIMP)
+|   |-- modified_000.png            (edited externally, e.g. with GIMP)
+|   |-- logoimta.png
+|   |-- logomask_000.png
 |
 |-- output/
 |   |-- flow_visualization/
 |   |-- propagated_frames/
-|   `-- final_video.mp4
+|   |-- final_video.mp4
 |
-|-- src/
-|   |-- config.py                  (paths and global parameters)
-|   |
 |   |-- motion/
 |   |   |-- optical_flow.py         (dense optical flow estimation)
-|   |   |-- long_term_flow.py       (temporal integration)
-|   |   `-- visualization.py
-|   |
-|   |-- editing/
-|   |   |-- warping.py              (image warping)
+|   |   |-- visualization.py
 |   |
 |   |-- utils/
 |   |   |-- io.py                   (frame I/O utilities)
 |   |   |-- video.py                (frame <-> video conversion)
-|   |   `-- logging.py
 |   |
-|   `-- main.py                    (end-to-end pipeline)
-|
-`-- slides/
-    `-- presentation.pdf
+|   `-- main.py                     (pipeline)
