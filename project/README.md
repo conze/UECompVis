@@ -1,43 +1,33 @@
 Optical Flow–Based Video Editing
 ===============================
 
-This repository provides a Python framework for dense and long-term optical flow
-estimation applied to video editing.
-The goal is to propagate a user-defined manual edit consistently across a video
-sequence using motion information.
+This repository contains a Python implementation of an optical flow–based video
+editing pipeline.
+The objective is to propagate a manual edit applied to a reference frame across
+a video sequence using dense and long-term motion estimation.
 
 Context
 -------
-This project was developed as part of the UE Computer Vision course.
+This project was developed in the context of the UE Computer Vision course.
+It is intended as an educational baseline rather than a production-ready system.
 
 Objectives
 ----------
-The main objectives of this project are:
+The goals of this project are to:
 - Estimate dense optical flow between consecutive video frames
 - Integrate motion over time to obtain long-term correspondences
-- Propagate a manual edit throughout a video using estimated motion fields
+- Propagate a manual image edit consistently across a video sequence
+- Analyze typical limitations such as drift, occlusions, and temporal artifacts
+
+Pipeline Overview
+-----------------
+1. Load a sequence of input frames
+2. Estimate dense optical flow between frames
+3. Accumulate motion to obtain long-term displacement fields
+4. Warp the edited reference frame through time
+5. Generate an edited output video
 
 Project Structure
------------------
-The core implementation is located in the src/ directory and follows a modular
-pipeline.
-
-Requirements
-------------
-- Python 3.9 or later
-- OpenCV
-- NumPy
-
-All dependencies are listed in requirements.txt.
-
-Disclaimer
-----------
-This code is provided for educational purposes only.
-It serves as a baseline implementation: students are expected to analyze its
-limitations (e.g. drift, occlusions, temporal inconsistencies) and propose
-improvements.
-
-Code Architecture
 -----------------
 
 project/
@@ -46,15 +36,12 @@ project/
 |-- requirements.txt
 |
 |-- data/
-|   |-- input_frames/
-|   |   |-- frame_000.png
-|   |   |-- frame_001.png
-|   |   `-- ...
-|   `-- masks/                     (optional: manual or automatic)
+|   |-- input_frames/          (input video frames)
+|   `-- masks/                 (optional: manual or automatic)
 |
 |-- edit/
 |   |-- reference_frame.png
-|   `-- edited_frame.png           (edited externally, e.g. with GIMP)
+|   `-- edited_frame.png       (edited externally, e.g. with GIMP)
 |
 |-- output/
 |   |-- flow_visualization/
@@ -62,34 +49,59 @@ project/
 |   `-- final_video.mp4
 |
 |-- src/
-|   |-- __init__.py
-|   |
-|   |-- config.py                  (paths and global parameters)
+|   |-- config.py              (paths and global parameters)
 |   |
 |   |-- motion/
-|   |   |-- __init__.py
-|   |   |-- optical_flow.py         (dense optical flow estimation)
-|   |   |-- long_term_flow.py       (temporal motion integration)
+|   |   |-- optical_flow.py    (dense optical flow estimation)
+|   |   |-- long_term_flow.py  (temporal integration)
 |   |   `-- visualization.py
 |   |
 |   |-- editing/
-|   |   |-- __init__.py
-|   |   |-- warping.py              (image warping)
-|   |   |-- propagation.py          (edit propagation logic)
-|   |   `-- occlusion.py            (optional occlusion handling)
+|   |   |-- warping.py         (image warping)
+|   |   |-- propagation.py    (edit propagation logic)
+|   |   `-- occlusion.py       (optional occlusion handling)
 |   |
 |   |-- evaluation/
-|   |   |-- __init__.py
 |   |   |-- temporal_metrics.py
 |   |   `-- qualitative.py
 |   |
 |   |-- utils/
-|   |   |-- __init__.py
-|   |   |-- io.py                   (frame I/O utilities)
-|   |   |-- video.py                (frame <-> video conversion)
+|   |   |-- io.py              (frame I/O utilities)
+|   |   |-- video.py           (frame <-> video conversion)
 |   |   `-- logging.py
 |   |
-|   `-- main.py                    (end-to-end pipeline)
+|   `-- main.py                (end-to-end pipeline)
 |
 `-- slides/
     `-- presentation.pdf
+
+Requirements
+------------
+- Python 3.9 or later
+- NumPy
+- OpenCV
+- SciPy
+- Matplotlib
+- tqdm
+
+Install dependencies using:
+pip install -r requirements.txt
+
+Usage
+-----
+1. Place video frames in data/input_frames/
+2. Edit edit/reference_frame.png externally
+3. Configure paths and parameters in src/config.py
+4. Run the pipeline with:
+   python src/main.py
+
+Results are saved in the output/ directory.
+
+Disclaimer
+----------
+This code is provided for educational purposes only.
+It is intentionally simplified and does not handle all real-world challenges
+robustly.
+
+Students are encouraged to identify failure cases, analyze limitations, and
+propose improvements.
