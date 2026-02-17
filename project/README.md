@@ -1,6 +1,6 @@
 # Long-term dense motion estimation for video editing
 
-This repository contains a Python implementation of an **optical flow**–based **video editing **pipeline.
+This repository contains a Python implementation of an **optical flow**–based **video editing** pipeline.
 
 The objective is to propagate a **manual edit applied to a reference frame** across a video sequence
 using dense and long-term motion estimation.
