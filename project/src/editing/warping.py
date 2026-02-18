@@ -65,27 +65,29 @@ def warp_image(image, flow, interpolation=cv2.INTER_LINEAR, border_mode=cv2.BORD
 
 def warp_mask(mask, flow):
     """
-    Warp a binary or label mask using nearest-neighbor interpolation.
+    Warp a binary or soft mask using nearest-neighbor interpolation.
 
-    Parameters
-    ----------
-    mask : np.ndarray
-        Input mask of shape (H, W)
-    flow : np.ndarray
-        Optical flow of shape (H, W, 2)
-
-    Returns
-    -------
-    warped_mask : np.ndarray
-        Warped mask
+    Output mask is float32 in [0, 1] with shape (H, W, 1),
+    ready for alpha blending with RGB images.
     """
-    return warp_image(
+
+    warped = warp_image(
         mask,
         flow,
         interpolation=cv2.INTER_NEAREST,
         border_mode=cv2.BORDER_CONSTANT,
     )
 
+    # Convert to float in [0, 1]
+    warped = warped.astype(np.float32)
+    if warped.max() > 1.0:
+        warped /= 255.0
+
+    # Ensure channel dimension for broadcasting
+    if warped.ndim == 2:
+        warped = warped[..., None]  # (H, W, 1)
+
+    return warped
 
 def warp_sequence(frames, flows):
     """
